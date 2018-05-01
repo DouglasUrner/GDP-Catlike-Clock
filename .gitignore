@@ -1,0 +1,6 @@
+# .gitignore
+#
+# For Unity & Rider
+#
+.DS_Store
+.idea

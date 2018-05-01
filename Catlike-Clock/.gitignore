@@ -1,0 +1,21 @@
+# .gitignore
+#
+# For Unity & Rider
+#
+# Ignore Everything
+/*
+
+# Except for these:
+!.gitattributes
+!.gitignore
+!Assets
+!ProjectSettings
+!README*
+!License
+
+# But do ignore these:
+#
+# The JetBrains Rider plugin breaks things on
+# machines without Rider installed.
+#
+Assets/Plugins/Editor/JetBrains*
