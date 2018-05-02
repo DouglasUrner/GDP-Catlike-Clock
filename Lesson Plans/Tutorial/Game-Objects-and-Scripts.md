@@ -102,48 +102,29 @@ a gear icon, in their top right corner.
 
 No more collider.
 
-To turn the cylinder into a clock face, we have to flatten it. This is done by
-decreasing the Y component of its scale. Reduce it to 0.1. As the cylinder mesh
-is two units high, its effective height becomes 0.2 units. Let's also make a big
-clock, so increase the X and Z components of its scale to 10.
+To turn the cylinder into a clock face, we have to flatten it. This is done by decreasing the Y component of its scale. Reduce it to 0.1. As the cylinder mesh is two units high, its effective height becomes 0.2 units. Let's also make a big clock, so increase the X and Z components of its scale to 10.
 
-![](images/Game-Objects-and-Scripts-009.png)
+<img src="images/Game-Objects-and-Scripts-009.png" width="48%">
+<img src="images/Game-Objects-and-Scripts-008.png" width="48%">
 
-![](images/Game-Objects-and-Scripts-008.png)
 A scaled cylinder.
 
-Change the name of the cylinder object to Face, as it represents the face of the
-clock. It is part of the clock, so make it a child of the Clock object. You can
-do this by dragging the face onto the clock in the Hierarchy window.
+Change the name of the cylinder object to Face, as it represents the face of the clock. It is part of the clock, so make it a child of the Clock object. You can do this by dragging the face onto the clock in the Hierarchy window.
 
-![](images/Game-Objects-and-Scripts-010.png)
+<img src="images/Game-Objects-and-Scripts-010.png" width="48%">
 
 Face child object.
 
-Child objects are subject to the transformation of their parent object. This
-means that when Clock changes position, Face does as well. It's as if they were
-a single entity. The same goes for rotation and scale. You can use this to make
-complex object hierarchies.
+Child objects are subject to the transformation of their parent object. This means that when Clock changes position, Face does as well. It's as if they were a single entity. The same goes for rotation and scale. You can use this to make complex object hierarchies.
 
 ### 1.3: Creating the Clock Periphery
 
-The outer ring of a clock's face usually has markings that help indicate what
-time it is displaying. This is known as the clock periphery. Let's use blocks
-to indicate the hours of a 12-hour clock. Add a cube object to the scene via
-GameObject / 3D Object / Cube. Change its scale to (0.5, 0.2, 1) so it becomes
-a narrow flat long block. It is now located inside the clock's face. Set its
-position to (0, 0.2, 4). That places it on top of the face and to the side that
-corresponds with the 12th hour. Name it Hour Indicator.
+The outer ring of a clock's face usually has markings that help indicate what time it is displaying. This is known as the clock periphery. Let's use blocks to indicate the hours of a 12-hour clock. Add a cube object to the scene via GameObject / 3D Object / Cube. Change its scale to (0.5, 0.2, 1) so it becomes a narrow flat long block. It is now located inside the clock's face. Set its position to (0, 0.2, 4). That places it on top of the face and to the side that corresponds with the 12th hour. Name it Hour Indicator.
 
 ![](images/Game-Objects-and-Scripts-010.png)
 Indicator for the 12th hour.
 
-The indicator is hard to see, because it has the same color as the face. Let's
-create a separate material for it, via Assets / Create / Material, or via the
-context menu of the Project window. This gives us a material asset that is a
-duplicate of the default material. Change its Albedo to something darker, like
-73 for red, green, and blue. That results in a dark gray material. Give it an
-appropriate name, like Clock Dark.
+The indicator is hard to see, because it has the same color as the face. Let's create a separate material for it, via Assets / Create / Material, or via the context menu of the Project window. This gives us a material asset that is a duplicate of the default material. Change its Albedo to something darker, like 73 for red, green, and blue. That results in a dark gray material. Give it an appropriate name, like Clock Dark.
 
 ![](images/Game-Objects-and-Scripts-011.png)
 
@@ -152,95 +133,55 @@ appropriate name, like Clock Dark.
 >**What is albedo?**
 Albedo is a Latin word which means whiteness. It's simply the color of a material.
 
-Make the hour indicator use this material. You can do this by dragging the
-material onto the object in either the scene or hierarchy window. You can also
-drag it to the bottom of the inspector window, or change Element 0 of the mesh
-renderer's Materials array.
+Make the hour indicator use this material. You can do this by dragging the material onto the object in either the scene or hierarchy window. You can also drag it to the bottom of the inspector window, or change Element 0 of the mesh renderer's Materials array.
 
 ![](images/Game-Objects-and-Scripts-012.png)
 
 Dark hour indicator.
 
-Our indicator is correctly positioned for hour 12, but what if we wanted to
-indicate hour 1? As there are twelve hours and a full circle has 360°, we'd have
-to rotate the indicator 30° around the Y axis. Let's give that a try.
+Our indicator is correctly positioned for hour 12, but what if we wanted to indicate hour 1? As there are twelve hours and a full circle has 360°, we'd have to rotate the indicator 30° around the Y axis. Let's give that a try.
 
 ![](images/Game-Objects-and-Scripts-013.png)
 
 Rotated hour indicator, incorrectly positioned.
 
-While this gives us the correct orientation, the indicator is still in the
-position for hour 12. This is the case because an object's rotation is relative
-to its own local origin, which is its position. We have to move the indicator
-along the edge of the face to align it with hour 1. Instead of figuring out this
-position ourselves, we can use the object hierarchy to do this for us. First
-reset the indicator's rotation to 0. Then create a new empty object, with
-position and rotation 0 and scale 1. Make the indicator a child of that object.
+While this gives us the correct orientation, the indicator is still in the position for hour 12. This is the case because an object's rotation is relative to its own local origin, which is its position. We have to move the indicator along the edge of the face to align it with hour 1. Instead of figuring out this position ourselves, we can use the object hierarchy to do this for us. First reset the indicator's rotation to 0. Then create a new empty object, with position and rotation 0 and scale 1. Make the indicator a child of that object.
 
 Temporary parent.
 
-Now set the parent's Y rotation to 30°. The indicator will rotate as well,
-effectively orbiting it's parent's origin, and ends up exactly where we want it
-to be.
+Now set the parent's Y rotation to 30°. The indicator will rotate as well, effectively orbiting it's parent's origin, and ends up exactly where we want it to be.
 
 Correctly positioned hour indicator.
 
-Duplicate the temporary parent, with Control or Command D, or via the context
-menu in the hierarchy. Increase the Y rotation of the duplicate by another 30°.
-Keep doing this until you end up with one indicator per hour.
+Duplicate the temporary parent, with Control or Command D, or via the context menu in the hierarchy. Increase the Y rotation of the duplicate by another 30°. Keep doing this until you end up with one indicator per hour.
 
 Twelve hour indicators.
 
-We no longer need the temporary parents. Select one of the hour indicators in
-the hierarchy and drag it onto the clock. It has now become a child of the
-clock. When this happened, Unity changed the indicator's transformation so its
-position and rotation didn't change in world space. Repeat this for all twelve
-indicators, then delete the temporary parent objects. You can speed this up by
-selecting multiple objects at the same time, via control- or command-clicking.
+We no longer need the temporary parents. Select one of the hour indicators in the hierarchy and drag it onto the clock. It has now become a child of the clock. When this happened, Unity changed the indicator's transformation so its position and rotation didn't change in world space. Repeat this for all twelve indicators, then delete the temporary parent objects. You can speed this up by selecting multiple objects at the same time, via control- or command-clicking.
 
 Periphery children.
 
 >**I'm seeing values like 90.00001. Is that a problem?** That happens because the
-position, rotation, and scale components are floating-point numbers. These
-numbers have limited precision, which can cause minuscule deviations from the
-numbers you'd expect. You don't have to worry about deviations of 0.00001 as
-they're not perceivable.
+position, rotation, and scale components are floating-point numbers. These numbers have limited precision, which can cause minuscule deviations from the numbers you'd expect. You don't have to worry about deviations of 0.00001 as they're not perceivable.
 
 ### 1.4: Creating the Arms
 
-We can use the same approach to construct the arms of the clock. Create another
-cube named Arm and give it the same dark material that the indicators use. Set
-its scale to `(0.3, 0.2, 2.5)` so it's narrower and longer than the indicators.
-Set its position to `(0, 0.2, 0.75)` so it sits on top of the face and points
-towards hour 12, but also a bit in the opposite direction. That makes it look as
-if the arm has a little counterweight when it rotates.
+We can use the same approach to construct the arms of the clock. Create another cube named Arm and give it the same dark material that the indicators use. Set its scale to `(0.3, 0.2, 2.5)` so it's narrower and longer than the indicators. Set its position to `(0, 0.2, 0.75)` so it sits on top of the face and points towards hour 12, but also a bit in the opposite direction. That makes it look as if the arm has a little counterweight when it rotates.
 
 Hours arm.
 
->**Where did the light's icon go?** I moved the light out of the way, so it no
->longer clutters the scene view. As it is a directional light, its position
->doesn't matter.
+>**Where did the light's gizmo go?**
+I moved the light out of the way, so it no longer clutters the scene view. As it is a directional light, its position doesn't matter.
 
-To make the arm pivot around the center of the clock, create a parent object for
-it, like we did to position the hour indicators. Again make sure that its
-transformation has the default values of 0 for position and rotation and 1 for
-scale. Because we'll be rotating the arm later, make this parent a child of the
-clock and name it Hours Arm. So Arm ends up as a grandchild of Clock.
+To make the arm pivot around the center of the clock, create a parent object for it, like we did to position the hour indicators. Again make sure that its transformation has the default values of 0 for position and rotation and 1 for scale. Because we'll be rotating the arm later, make this parent a child of the clock and name it Hours Arm. So Arm ends up as a grandchild of Clock.
 
 Clock hierarchy with hours arm.
 
-Duplicate Hours Arm twice to create Minutes Arm and Seconds Arm. The minutes arm
-should be narrow and longer than the hours arm, so set its Arm child object's
-scale to (0.2, 0.15, 4) and its position to (0, 0.375, 1). That way it ends up
-on top of the hours arm. For the child of Seconds Arms, use scale (0.1, 0.1, 5)
-and position (0, 0.5, 1.25). To differentiate it further, I created a Clock Red
-material with the RGB values of its albedo set to (197, 0, 0) and made the Arm
-child use that.
+Duplicate Hours Arm twice to create Minutes Arm and Seconds Arm. The minutes arm should be narrow and longer than the hours arm, so set its Arm child object's scale to (0.2, 0.15, 4) and its position to (0, 0.375, 1). That way it ends up on top of the hours arm. For the child of Seconds Arms, use scale (0.1, 0.1, 5) and position (0, 0.5, 1.25). To differentiate it further, I created a Clock Red material with the RGB values of its albedo set to (197, 0, 0) and made the Arm child use that.
 
 All three arms.
 
-Our clock has now been constructed. If you haven't done so already, this is a
-good moment to save the scene. It will be stored as an asset in the project.
+Our clock has now been constructed. If you haven't done so already, this is a good moment to save the scene. It will be stored as an asset in the project.
 
 Saved scene.
 
@@ -277,10 +218,8 @@ public class Clock : MonoBehaviour {
 
 This is C# code. It's the programming language used for scripting in Unity. To understand how the code works, we'll delete it all and start from scratch.
 
->**What about JavaScript?** Unity also supported another programming language,
-usually referred to as JavaScript, but its actual name is UnityScript. Unity
-2017.1.0 still supports it, but the menu item to create a JavaScript asset will
-be removed in Unity 2017.2.0. Expect support to be dropped entirely after that.
+>**What about JavaScript?**
+Unity also supported another programming language, usually referred to as JavaScript, but its actual name is UnityScript. Unity 2017.1.0 still supports it, but the menu item to create a JavaScript asset will be removed in Unity 2017.2.0. Expect support to be dropped entirely after that.
 
 ### 2.1: Defining a Component Type
 
@@ -367,7 +306,7 @@ code and prevent name clashes.
 
 Because it is inconvenient to always have to use the UnityEngine prefix when
 accessing Unity types, we can tell the compiler to search this namespace when we
-don't explicitly mention any. This is done by adding using UnityEngine; at the
+don't explicitly mention any. This is done by adding `using UnityEngine;` at the
 top of the file. The semicolon is required to mark the end of the command.
 
 ```csharp
@@ -376,14 +315,11 @@ using UnityEngine;
 public class Clock : MonoBehaviour {}
 ```
 
-Now we can add our component to our clock game object in Unity. This can be
-done either by dragging the script asset onto the object, or via the Add
-Component button at the bottom of the object's inspector.
+Now we can add our component to our clock game object in Unity. This can be done either by dragging the script asset onto the object, or via the Add Component button at the bottom of the object's inspector.
 
 Clock with our component.
 
-A C# object instance has now been created, using our Clock class as a template.
-It has been added to the component list of the Clock game object.
+A C# object instance has now been created, using our Clock class as a template. It has been added to the component list of the Clock game object.
 
 ### 2.2: Getting Hold of an Arm
 
@@ -393,9 +329,7 @@ its transform component. So we have to add knowledge of the hour arm's transform
 component to Clock. This can be done by adding a data field inside its code
 block, defined as a name followed by a semicolon.
 
-Hours transform would be an appropriate name. However, names have to be single
-words. The convention is to make the first word of a field name lowercase and
-capitalize all other words, then stick them together. So it becomes `hoursTransform.`
+Hours transform would be an appropriate name. However, names have to be single words. The convention is to make the first word of a field name lowercase and capitalize all other words, then stick them together – this is called *camel case*. So it becomes `hoursTransform.`
 
 ```csharp
 public class Clock : MonoBehaviour {
