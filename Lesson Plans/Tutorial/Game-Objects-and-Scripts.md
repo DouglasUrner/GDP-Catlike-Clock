@@ -1,32 +1,28 @@
-Catlike Coding
+*Catlike Coding: Unity C# Tutorials*
 
-Unity C# Tutorials
+# Game Objects and Scripts: Creating a Clock
 
-Game Objects and Scripts
+    Build a clock with simple objects.
+    Write a C# script.
+    Rotate the clock's arms to show the time.
+    Animate the arms.
 
-Creating a Clock
-
-Build a clock with simple objects.
-Write a C# script.
-Rotate the clock's arms to show the time.
-Animate the arms.
 In this tutorial we will create a simple clock and program a component to have it
 display the current time. You only need minimal understanding of the Unity editor. If
 you've played with it for a few minutes and know how to navigate the Scene window
 then you're good to go.
+
 This tutorial assumes you're using at least Unity 2017.1.0.
 
 It is time to create a clock.
 
-1
-
-Building a Simple Clock
+## 1: Building a Simple Clock
 
 Open Unity and create a new 3D project. You don't need any extra asset packages
 and you also don't need analytics. If you haven't customized the editor yet, you will
 end up with its default window layout.
 
-Default window layout.
+### Default window layout.
 
 I use a different layout, the 2 by 3 preset which you can select from the dropdown list
 at the top right corner of the editor. I customize that one further by switching the
@@ -44,9 +40,7 @@ disable the Low Resolution Aspect Ratios option.
 
 Low resolution aspect ratios disabled.
 
-1.1
-
-Creating a Game Object
+### 1.1: Creating a Game Object
 
 The default scene contains two game objects. They are listed in the Hierarchy window
 and you can also see their icons in the Scene window. First is the Main Camera, which
@@ -77,9 +71,7 @@ When working in 2D instead of 3D, you can ignore one of the three dimensions. Ob
 specifically meant for 2D – like UI elements – typically have a Rect Transform, which is a
 specialized Transform component.
 
-1.2
-
-Creating the Face of the Clock
+### 1.2: Creating the Face of the Clock
 
 Although we have a clock object, we don't see anything yet. We'll have to add 3D
 models to it so they get rendered. Unity contains a few primitive objects that we can
@@ -122,9 +114,8 @@ Child objects are subject to the transformation of their parent object. This mea
 that when Clock changes position, Face does as well. It's as if they were a single
 entity. The same goes for rotation and scale. You can use this to make complex
 object hierarchies.
-1.3
 
-Creating the Clock Periphery
+### 1.3: Creating the Clock Periphery
 
 The outer ring of a clock's face usually has markings that help indicate what time it is
 displaying. This is known as the clock periphery. Let's use blocks to indicate the
@@ -196,9 +187,7 @@ numbers. These numbers have limited precision, which can cause minuscule deviati
 from the numbers you'd expect. You don't have to worry about deviations of 0.00001 as
 they're not perceivable.
 
-1.4
-
-Creating the Arms
+### 1.4: Creating the Arms
 
 We can use the same approach to construct the arms of the clock. Create another
 cube named Arm and give it the same dark material that the indicators use. Set its
@@ -241,9 +230,7 @@ download a package containing the work done is this section. You can import thes
 packages into a Unity project via Assets / Import Package / Custom Package...,
 dragging it onto the Unity window, or double-clicking it in your file browser.
 
-2
-
-Animating the Clock
+## 2: Animating the Clock
 
 Our clock currently does not tell the time. It's just an object hierarchy, which causes
 Unity to render a bunch of meshes. Nothing more. Had there been a default clock
@@ -256,20 +243,24 @@ Clock script asset.
 When the script is selected, the inspector will show its contents, and a button to open
 the file in a code editor. You can also double-click the asset to open the editor. The
 script file will contain the default code template for a component, shown below.
+
+```csharp
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Clock : MonoBehaviour {
-// Use this for initialization
-void Start () {
-}
-// Update is called once per frame
-void Update () {
-}
-}
 
-This is C# code. It's the programming language used for scripting in Unity. To
-understand how the code works, we'll delete it all and start from scratch.
+public class Clock : MonoBehaviour {
+  // Use this for initialization
+  void Start () {
+  }
+
+  // Update is called once per frame
+  void Update () {
+  }
+}
+```
+
+This is C# code. It's the programming language used for scripting in Unity. To understand how the code works, we'll delete it all and start from scratch.
 
 What about JavaScript?
 Unity also supported another programming language, usually referred to as JavaScript,
@@ -277,9 +268,7 @@ but its actual name is UnityScript. Unity 2017.1.0 still supports it, but the me
 create a JavaScript asset will be removed in Unity 2017.2.0. Expect support to be
 dropped entirely after that.
 
-2.1
-
-Defining a Component Type
+### 2.1: Defining a Component Type
 
 An empty file is not a valid script. It must contain the definition of our clock
 component. We don't define a single instance of a component. Instead, we define the
@@ -366,9 +355,8 @@ Clock with our component.
 
 A C# object instance has now been created, using our Clock class as a template. It
 has been added to the component list of the Clock game object.
-2.2
 
-Getting Hold of an Arm
+### 2.2: Getting Hold of an Arm
 
 To rotate the arms, Clock objects need to know about them. Let's start with the hours
 arm. Like all game objects, it can be rotated by changing the rotation of its transform
@@ -379,9 +367,12 @@ name followed by a semicolon.
 Hours transform would be an appropriate name. However, names have to be single
 words. The convention is to make the first word of a field name lowercase and
 capitalize all other words, then stick them together. So it becomes hoursTransform.
+
+```csharp
 public class Clock : MonoBehaviour {
-hoursTransform;
+  hoursTransform;
 }
+```
 
 Where did the using statement go?
 It's still there, I just didn't show it. The code fragments will contain enough of the
@@ -419,28 +410,31 @@ Hours transform connected.
 After dragging or selecting the hours arm object, the Unity editor grabs its transform
 component and puts a reference to it in our field.
 
-2.3
-
-Knowing all Three Arms
+### 2.3: Knowing all Three Arms
 
 We have to do the same for the minutes and seconds arms. So add two more
 appropriately-named fields to Clock.
+
+```csharp
 public Transform hoursTransform;
 public Transform minutesTransform;
 public Transform secondsTransform;
+```
 
 It is possible to make these field declarations more concise, because they share the
 same access modifier and type. They can be consolidated into a comma-separated
 list of field names following the access modifier and type.
 
+```csharp
 //
 //
 
 public Transform hoursTransform, minutesTransform, secondsTransform;
 public Transform minutesTransform;
 public Transform secondsTransform;
+```
 
-What does // do?
+What does `//`` do?
 Double slashes indicate a comment. All text after them until the end of the line is
 ignored by the compiler. It is used to add text to clarify code, if needed. I also use it to
 indicate code that has been removed. Deleted code also has a line through it.
@@ -449,9 +443,7 @@ Hook up the other two arms in the editor as well.
 
 All three arms connected.
 
-2.4
-
-Knowing the Time
+### 2.4: Knowing the Time
 
 Now that we can reach the arms in Clock, the next step is to figure out the current
 time. To do this, we need to tell Clock to execute some code. This is done by adding
@@ -459,10 +451,12 @@ a code block to the class, known as a method. The block has to be prefixed by a
 name, which is capitalized by convention. We'll name it Awake, suggesting that the
 code should be executed when the component awakens.
 
+```csharp
 public class Clock : MonoBehaviour {
-public Transform hoursTransform, minutesTransform, secondsTransform;
-Awake {}
+  public Transform hoursTransform, minutesTransform, secondsTransform;
+  Awake {}
 }
+```
 
 Methods are somewhat like mathematical functions, for example f(x) = 2x + 3.
 That function takes a number, doubles it, then adds three. It operates on a single
@@ -472,12 +466,15 @@ As that's rather generic, what is the result of such a function? That has to be
 mentioned explicitly. In our case, we just want to execute some code, without
 providing a resulting value. In other words, the result of the method is void. We
 indicated this with the void prefix.
+
+```csharp
 void Awake {}
 
 We also don't need any input data. However, we still have to define the method's
 parameters, as a comma-separated list between round brackets. It's just empty in
 our case.
 void Awake () {}
+```
 
 We now have a valid method, although it doesn't do anything yet. Like Unity detected
 our fields, it also detects this Awake method. When a component has an Awake method,
@@ -495,9 +492,11 @@ UnityEngine.Debug class contains a publicly-available Log method for this purpos
 We'll pass it a simple string of text to print. Strings are written between double
 quotes. Again, a semicolon is required to mark the end of an expression.
 
+```csharp
 void Awake () {
-Debug.Log("Test");
+  Debug.Log("Test");
 }
+```
 
 Enter play mode in the Unity editor. You'll see the test string show up in the status
 bar at the bottom of the editor. You can also see it in the console window, which you
@@ -506,9 +505,12 @@ like which code generated the message, when you select the logged text.
 Now that we know that our method works, let's figure out the current time when it is
 invoked. The UnityEngine namespace contains a Time class, which in turn contains a
 time property. It seems obvious to use that, so let's log it.
+
+```csharp
 void Awake () {
 Debug.Log(Time.time);
 }
+```
 
 What's a property?
 A property is a method that pretends to be a field. It might be read-only or write-only.
@@ -529,6 +531,8 @@ struct instead of class.
 
 has a publicly-accessible Now property. It produces a DateTime value that
 contains the current system date and time. Let's log it.
+
+```csharp
 DateTime
 
 using System;
@@ -539,30 +543,35 @@ void Awake () {
 Debug.Log(DateTime.Now);
 }
 }
+```
 
 Now we get a timestamp logged each time we enter play mode.
-2.5
 
-Rotating the Arms
+### 2.5: Rotating the Arms
 
 The next step is to rotate the clock's arms based on the current time. Let's again start
 with the hours. DateTime has an Hour property that gets us the hours portion of a
 DateTime value. Invoking it on the current timestamp will give us the hour of the day.
+
+```csharp
 void Awake () {
 Debug.Log(DateTime.Now.Hour);
 }
+```
 
 We can use that to construct a rotation. Rotations are stored in Unity as quaternions.
 We can create one via the publicly-available Quaternion.Euler method. It has regular
 angles for the X, Y, and Z axis as parameters and produces an appropriate
 quaternion.
 
+```csharp
 //
 
 void Awake () {
 Debug.Log(DateTime.Now.Hour);
 Quaternion.Euler(0, DateTime.Now.Hour, 0);
 }
+```
 
 What's a quaternion?
 Quaternions are based on complex numbers and are used to represent 3D rotations.
@@ -623,6 +632,8 @@ compensated for.
 The hours arm now jumps to the correct orientation when entering play mode. Let's
 give the same treatment to the other two arms. Both a minute and a second take up
 six degrees.
+
+```csharp
 const float
 degreesPerHour = 30f,
 degreesPerMinute = 6f,
@@ -636,6 +647,7 @@ Quaternion.Euler(0f, DateTime.Now.Minute * degreesPerMinute, 0f);
 secondsTransform.localRotation =
 Quaternion.Euler(0f, DateTime.Now.Second * degreesPerSecond, 0f);
 }
+```
 
 Clock displaying 16:29:06.
 
@@ -648,6 +660,7 @@ What's a variable?
 A variable acts like a field, except that it exists only while a method is being executed. It
 belongs to the method, not the class.
 
+```csharp
 void Awake () {
 DateTime time = DateTime.Now;
 hoursTransform.localRotation =
@@ -657,15 +670,15 @@ Quaternion.Euler(0f, time.Minute * degreesPerMinute, 0f);
 secondsTransform.localRotation =
 Quaternion.Euler(0f, time.Second * degreesPerSecond, 0f);
 }
-
-2.6
-
-Animating the Arms
+```
+### 2.6: Animating the Arms
 
 We get the current time when entering play mode, but after that the clock remains
 motionless. To keep the clock synchronized with the current time, change the name
 of our Awake method to Update. This method gets invoked by Unity every frame instead
 of just once, as long as we stay in play mode.
+
+```csharp
 void Update () {
 DateTime time = DateTime.Now;
 hoursTransform.localRotation =
@@ -675,6 +688,7 @@ Quaternion.Euler(0f, time.Minute * degreesPerMinute, 0f);
 secondsTransform.localRotation =
 Quaternion.Euler(0f, time.Second * degreesPerSecond, 0f);
 }
+```
 
 Clock that stays up to date.
 
@@ -684,9 +698,7 @@ invoking its Update method.
 
 Now with enabled toggle.
 
-2.7
-
-Continuously Rotating
+### 2.7: Continuously Rotating
 
 The arms of our clock indicate exactly the current hour, minute, or second. It
 behaves like a digital clock, discrete but with arms. Many clocks have slowly-rotating
@@ -704,6 +716,8 @@ Using the continuous option.
 
 We now have two approaches to support. To prepare for this, duplicate our Update
 method and rename them to UpdateContinuous and UpdateDiscrete.
+
+```csharp
 void UpdateContinuous () {}
 DateTime time = DateTime.Now;
 hoursTransform.localRotation =
@@ -722,24 +736,27 @@ Quaternion.Euler(0f, time.Minute * degreesPerMinute, 0f);
 secondsTransform.localRotation =
 Quaternion.Euler(0f, time.Second * degreesPerSecond, 0f);
 }
+```
 
 Create a new Update method. If continuous is true, then it should invoke
 UpdateContinuous. This can be done with an if statement. The if keyword is followed
 by an expression within round brackets. If that expression evaluates as true, then the
 code block following it is executed. Otherwise, the code block is skipped.
+
+```csharp
 void Update () {
 if (continuous) {
 UpdateContinuous();
 }
 }
+```
 
 Where does the new Update method have to be defined?
-Inside the Clock class. Its position relative to the other two methods doesn't matter. It
-can be either above or below them.
+Inside the Clock class. Its position relative to the other two methods doesn't matter. It can be either above or below them.
 
-It is also possible to add an alternative code block, to be executed when the
-expression ends up false. This is done with the else keyword. We can use that to
-invoke our UpdateDiscrete method.
+It is also possible to add an alternative code block, to be executed when the expression ends up false. This is done with the else keyword. We can use that to invoke our UpdateDiscrete method.
+
+```csharp
 void Update () {
 if (continuous) {
 UpdateContinuous();
@@ -748,12 +765,15 @@ else {
 UpdateDiscrete();
 }
 }
+```
 
 We can now switch between approaches, but both still do the same thing. We have to
 adjust UpdateContinuous so it displays fractional hours, minutes, and seconds.
 Unfortunately, DateTime doesn't contain convenient fractional data. Fortunately, it
 does have a TimeOfDay property. This gives us a TimeSpan value that contains the data
 in the format that we need. Specifically TotalHours, TotalMinutes, and TotalSeconds.
+
+```csharp
 void UpdateContinuous () {
 TimeSpan time = DateTime.Now.TimeOfDay;
 hoursTransform.localRotation =
@@ -763,6 +783,7 @@ Quaternion.Euler(0f, time.TotalMinutes * degreesPerMinute, 0f);
 secondsTransform.localRotation =
 Quaternion.Euler(0f, time.TotalSeconds * degreesPerSecond, 0f);
 }
+```
 
 This will result in compile errors, because the new values have the wrong type. They
 are defines as double-precision floating point values, known as double. These values
@@ -777,12 +798,15 @@ problems. Hence, most game engines use floats.
 We can solve this problem by converting from double to float. This simply discards
 the precision data that we do not need. This process is known as casting and is done
 by writing the new type within round brackets in front of the value to be converted.
+
+```csharp
 hoursTransform.localRotation =
 Quaternion.Euler(0f, (float)time.TotalHours * degreesPerHour, 0f);
 minutesTransform.localRotation =
 Quaternion.Euler(0f, (float)time.TotalMinutes * degreesPerMinute, 0f);
 secondsTransform.localRotation =
 Quaternion.Euler(0f, (float)time.TotalSeconds * degreesPerSecond, 0f);
+```
 
 Clock with continuously rotating arms.
 
