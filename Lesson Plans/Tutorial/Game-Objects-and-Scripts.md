@@ -45,7 +45,6 @@ Aspect Ratios option.
 >![Low resolution aspect ratios disabled.](images/Game-Objects-and-Scripts-003.png)
 Low resolution aspect ratios disabled.
 
-
 ### 1.1: Creating a Game Object
 
 The default scene contains two game objects. They are listed in the Hierarchy
@@ -57,6 +56,7 @@ Low resolution aspect ratios disabled.
 object to the scene, which you can immediately give a name. As we're going to
 create a clock, name it Clock.
 
+![Hierarchy with clock object.](images/Game-Objects-and-Scripts-004.png)
 Hierarchy with clock object.
 
 The Inspector window shows the details of game objects. When our clock object is
@@ -66,15 +66,14 @@ have a tag, and belongs to the default layer. These settings are fine for us.
 Below that, it shows a list of all the components of the game object. There is
 always a Transform component, which is all our clock currently has.
 
+![Inspector window with clock selected.](images/Game-Objects-and-Scripts-005.png)
 Inspector window with clock selected.
 
 The Transform component contains the position, rotation, and scale of the object
 in 3D space. Make sure that the clock's position and rotation are both 0. Its
 scale should be 1.
 
->What about 2D objects?
->
-> When working in 2D instead of 3D, you can ignore one of the three dimensions. Objects specifically meant for 2D – like UI elements – typically have a Rect Transform, which is a specialized Transform component.
+>**What about 2D objects?** When working in 2D instead of 3D, you can ignore one of the three dimensions. Objects specifically meant for 2D – like UI elements – typically have a Rect Transform, which is a specialized Transform component.
 
 ### 1.2: Creating the Face of the Clock
 
@@ -82,6 +81,8 @@ Although we have a clock object, we don't see anything yet. We'll have to add 3D
 models to it so they get rendered. Unity contains a few primitive objects that
 we can use to build a simple clock. Let's begin by adding a cylinder to the
 scene via GameObject / 3D Object / Cylinder. Make sure that it has the same Transform values as our clock.
+
+![Game object representing a cylinder.](images/Game-Objects-and-Scripts-006.png)
 
 Game object representing a cylinder.
 
@@ -97,6 +98,8 @@ cylinder collider. We don't need it, so we can remove that component. If you'd
 like to use physics with your clock, you're better off using a Mesh Collider component. Components can be removed via the dropdown menu with
 a gear icon, in their top right corner.
 
+![](images/Game-Objects-and-Scripts-007.png)
+
 No more collider.
 
 To turn the cylinder into a clock face, we have to flatten it. This is done by
@@ -104,11 +107,16 @@ decreasing the Y component of its scale. Reduce it to 0.1. As the cylinder mesh
 is two units high, its effective height becomes 0.2 units. Let's also make a big
 clock, so increase the X and Z components of its scale to 10.
 
+![](images/Game-Objects-and-Scripts-009.png)
+
+![](images/Game-Objects-and-Scripts-008.png)
 A scaled cylinder.
 
 Change the name of the cylinder object to Face, as it represents the face of the
 clock. It is part of the clock, so make it a child of the Clock object. You can
 do this by dragging the face onto the clock in the Hierarchy window.
+
+![](images/Game-Objects-and-Scripts-010.png)
 
 Face child object.
 
@@ -127,6 +135,7 @@ complex object hierarchies.
 position to (0, 0.2, 4). That places it on top of the face and to the side that
 corresponds with the 12th hour. Name it Hour Indicator.
 
+![](images/Game-Objects-and-Scripts-010.png)
 Indicator for the 12th hour.
 
 The indicator is hard to see, because it has the same color as the face. Let's
@@ -136,22 +145,27 @@ duplicate of the default material. Change its Albedo to something darker, like
 73 for red, green, and blue. That results in a dark gray material. Give it an
 appropriate name, like Clock Dark.
 
+![](images/Game-Objects-and-Scripts-011.png)
+
 Dark material asset and color popup.
 
->What is albedo?
->
->Albedo is a Latin word which means whiteness. It's simply the color of a material.
+>**What is albedo?**
+Albedo is a Latin word which means whiteness. It's simply the color of a material.
 
 Make the hour indicator use this material. You can do this by dragging the
 material onto the object in either the scene or hierarchy window. You can also
 drag it to the bottom of the inspector window, or change Element 0 of the mesh
 renderer's Materials array.
 
+![](images/Game-Objects-and-Scripts-012.png)
+
 Dark hour indicator.
 
 Our indicator is correctly positioned for hour 12, but what if we wanted to
 indicate hour 1? As there are twelve hours and a full circle has 360°, we'd have
 to rotate the indicator 30° around the Y axis. Let's give that a try.
+
+![](images/Game-Objects-and-Scripts-013.png)
 
 Rotated hour indicator, incorrectly positioned.
 
