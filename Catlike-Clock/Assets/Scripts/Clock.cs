@@ -5,6 +5,6 @@ public class Clock : MonoBehaviour {
 	public Transform hourTransform, minuteTransform, secondTransform;
 
 	void Awake() {
-		Debug.Log("Test");
+		Debug.Log(Time.time);
 	}
 }
