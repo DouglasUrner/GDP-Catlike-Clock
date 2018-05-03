@@ -314,7 +314,7 @@ Once the field is public, it will show up in the inspector window. This happens 
 
 <img src="images/Game-Objects-and-Scripts-033.png" width="48%">
 
-Hours transform field.
+_Hours transform field._
 
 To make the proper connection, drag the Hours Arm from the hierarchy onto the Hours Transform field. Alternatively, use the circular button at the right of the field and search for Hours Arm.
 
@@ -324,7 +324,7 @@ Hours transform connected.
 
 After dragging or selecting the hours arm object, the Unity editor grabs its transform component and puts a reference to it in our field.
 
-### 2.3: Animating All Three Arms
+### 2.3: Animating All Three Arms
 
 We have to do the same for the minutes and seconds arms. So add two more appropriately-named fields to Clock.
 

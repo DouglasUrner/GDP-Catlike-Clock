@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
 public class Clock : MonoBehaviour {
-	public Transform hoursTransform;
+	public Transform hourTransform;
+	public Transform minuteTransform;
+	public Transform secondTransform;
 }
