@@ -1,8 +1,8 @@
-*Catlike Coding: Unity C# Tutorials*
+_Catlike Coding: Unity C# Tutorials_
 
 # Game Objects and Scripts: Creating a Clock
 
-by Jasper Flick
+_by Jasper Flick_
 
     Build a clock with simple objects.
     Write a C# script.
@@ -15,7 +15,7 @@ This tutorial assumes you're using at least Unity 2017.1.0.
 
 <img src="images/Game-Objects-and-Scripts-000.png" width="80%">
 
-It is time to create a clock.
+_It is time to create a clock._
 
 ## 1: Building a Simple Clock
 
@@ -23,7 +23,7 @@ Open Unity and create a new 3D project. You don't need any extra asset packages 
 
 <img src="images/Game-Objects-and-Scripts-001.png" width="80%">
 
-Default window layout.
+_Default window layout._
 
 I use a different layout, the 2 by 3 preset which you can select from the dropdown list at the top right corner of the editor. I customize that one further by switching the Project window to One Column Layout, which better fits its vertical orientation. You can change it via the small dropdown list next to it's lock icon, at the top right of the window above its toolbar. I also disabled Show Grid in the Scene window, via its Gizmos dropdown menu.
 
@@ -35,7 +35,7 @@ That can happen when using a high-resolution display. To make it expand and fill
 >
 ><img src="images/Game-Objects-and-Scripts-003.png" width="50%">
 >
->Low resolution aspect ratios disabled.
+>_Low resolution aspect ratios disabled._
 
 ### 1.1: Creating a Game Object
 
@@ -44,13 +44,13 @@ That can happen when using a high-resolution display. To make it expand and fill
 
 <img src="images/Game-Objects-and-Scripts-004.png" width="40%">
 
-Hierarchy with clock object.
+_Hierarchy with clock object._
 
 The Inspector window shows the details of game objects. When our clock object is selected, it will contain a header with the object's name plus a few configuration options. By default, the object is enabled, is not static, doesn't have a tag, and belongs to the default layer. These settings are fine for us. Below that, it shows a list of all the components of the game object. There is always a Transform component, which is all our clock currently has.
 
 <img src="images/Game-Objects-and-Scripts-005.png" width="50%">
 
-Inspector window with clock selected.
+_Inspector window with clock selected._
 
 The *Transform* component contains the position, rotation, and scale of the object in 3D space. Make sure that the clock's position and rotation are both 0. Its scale should be 1.
 
@@ -63,7 +63,7 @@ Although we have a clock object, we don't see anything yet. We'll have to add 3D
 <img src="images/Game-Objects-and-Scripts-006.png" width="38%">
 <img src="images/Game-Objects-and-Scripts-007.png" width="50%">
 
-Game object representing a cylinder.
+_Game object representing a cylinder._
 
 The new object has three more components than an empty game object. First, it has a Mesh Filter, which simply contains a reference to the built-in cylinder mesh. Second is a Capsule Collider, which is for 3D physics. Third is a Mesh Renderer. That component is there to ensure that the object's mesh gets rendered. It also controls which material is used for rendering, which is the built-in Default-Material unless you change it. This material is also shown in the inspector, below the component list.
 
@@ -71,20 +71,20 @@ Although the object represents a cylinder, it has a capsule collider, because Un
 
 <img src="images/Game-Objects-and-Scripts-008.png" width="48%">
 
-No more collider.
+_No more collider._
 
 To turn the cylinder into a clock face, we have to flatten it. This is done by decreasing the Y component of its scale. Reduce it to 0.1. As the cylinder mesh is two units high, its effective height becomes 0.2 units. Let's also make a big clock, so increase the X and Z components of its scale to 10.
 
 <img src="images/Game-Objects-and-Scripts-009.png" width="48%">
 <img src="images/Game-Objects-and-Scripts-010.png" width="48%">
 
-A scaled cylinder.
+_A scaled cylinder._
 
 Change the name of the cylinder object to Face, as it represents the face of the clock. It is part of the clock, so make it a child of the Clock object. You can do this by dragging the face onto the clock in the Hierarchy window.
 
 <img src="images/Game-Objects-and-Scripts-011.png" width="30%">
 
-Face child object.
+_Face child object._
 
 Child objects are subject to the transformation of their parent object. This means that when Clock changes position, Face does as well. It's as if they were a single entity. The same goes for rotation and scale. You can use this to make complex object hierarchies.
 
@@ -95,14 +95,14 @@ Child objects are subject to the transformation of their parent object. This mea
 <img src="images/Game-Objects-and-Scripts-012.png" width="48%">
 <img src="images/Game-Objects-and-Scripts-013.png" width="48%">
 
-Indicator for the 12th hour.
+_Indicator for the 12th hour._
 
 The indicator is hard to see, because it has the same color as the face. Let's create a separate material for it, via Assets / Create / Material, or via the context menu of the Project window. This gives us a material asset that is a duplicate of the default material. Change its Albedo to something darker, like 73 for red, green, and blue. That results in a dark gray material. Give it an appropriate name, like Clock Dark.
 
 <img src="images/Game-Objects-and-Scripts-014.png" width="48%">
 <img src="images/Game-Objects-and-Scripts-015.png" width="30%">
 
-Dark material asset and color popup.
+_Dark material asset and color popup._
 
 >**What is albedo?**
 Albedo is a Latin word which means whiteness. It's simply the color of a material.
@@ -111,20 +111,20 @@ Make the hour indicator use this material. You can do this by dragging the mater
 
 <img src="images/Game-Objects-and-Scripts-016.png" width="48%">
 
-Dark hour indicator.
+_Dark hour indicator._
 
 Our indicator is correctly positioned for hour 12, but what if we wanted to indicate hour 1? As there are twelve hours and a full circle has 360°, we'd have to rotate the indicator 30° around the Y axis. Let's give that a try.
 
 <img src="images/Game-Objects-and-Scripts-017.png" width="48%">
 <img src="images/Game-Objects-and-Scripts-018.png" width="30%">
 
-Rotated hour indicator, incorrectly positioned.
+_Rotated hour indicator, incorrectly positioned._
 
 While this gives us the correct orientation, the indicator is still in the position for hour 12. This is the case because an object's rotation is relative to its own local origin, which is its position. We have to move the indicator along the edge of the face to align it with hour 1. Instead of figuring out this position ourselves, we can use the object hierarchy to do this for us. First reset the indicator's rotation to 0. Then create a new empty object, with position and rotation 0 and scale 1. Make the indicator a child of that object.
 
 <img src="images/Game-Objects-and-Scripts-019.png" width="30%">
 
-Temporary parent.
+_Temporary parent._
 
 Now set the parent's Y rotation to 30°. The indicator will rotate as well, effectively orbiting it's parent's origin, and ends up exactly where we want it to be.
 
@@ -136,13 +136,13 @@ Duplicate the temporary parent, with Control or Command D, or via the context me
 
 <img src="images/Game-Objects-and-Scripts-021.png" width="48%">
 
-Twelve hour indicators.
+_Twelve hour indicators._
 
 We no longer need the temporary parents. Select one of the hour indicators in the hierarchy and drag it onto the clock. It has now become a child of the clock. When this happened, Unity changed the indicator's transformation so its position and rotation didn't change in world space. Repeat this for all twelve indicators, then delete the temporary parent objects. You can speed this up by selecting multiple objects at the same time, via control- or command-clicking.
 
-Periphery children.
-
 <img src="images/Game-Objects-and-Scripts-022.png" width="30%">
+
+_Periphery children._
 
 >**I'm seeing values like 90.00001. Is that a problem?**
 That happens because the position, rotation, and scale components are floating-point numbers. These numbers have limited precision, which can cause minuscule deviations from the numbers you'd expect. You don't have to worry about deviations of 0.00001 as they're not perceivable.
@@ -154,7 +154,7 @@ We can use the same approach to construct the arms of the clock. Create another 
 <img src="images/Game-Objects-and-Scripts-023.png" width="43%">
 <img src="images/Game-Objects-and-Scripts-024.png" width="48%">
 
-Hours arm.
+_Hours arm._
 
 >**Where did the light's gizmo go?**
 I moved the light out of the way, so it no longer clutters the scene view. As it is a directional light, its position doesn't matter.
@@ -163,20 +163,20 @@ To make the arm pivot around the center of the clock, create a parent object for
 
 <img src="images/Game-Objects-and-Scripts-025.png" width="30%">
 
-Clock hierarchy with hours arm.
+_Clock hierarchy with hours arm._
 
 Duplicate Hours Arm twice to create Minutes Arm and Seconds Arm. The minutes arm should be narrow and longer than the hours arm, so set its Arm child object's scale to (0.2, 0.15, 4) and its position to (0, 0.375, 1). That way it ends up on top of the hours arm. For the child of Seconds Arms, use scale (0.1, 0.1, 5) and position (0, 0.5, 1.25). To differentiate it further, I created a Clock Red material with the RGB values of its albedo set to (197, 0, 0) and made the Arm child use that.
 
 <img src="images/Game-Objects-and-Scripts-026.png" width="48%">
 <img src="images/Game-Objects-and-Scripts-027.png" width="28%">
 
-All three arms.
+_All three arms._
 
 Our clock has now been constructed. If you haven't done so already, this is a good moment to save the scene. It will be stored as an asset in the project.
 
 <img src="images/Game-Objects-and-Scripts-028.png" width="30%">
 
-Saved scene.
+_Saved scene._
 
 ## 2: Animating the Clock
 
@@ -185,7 +185,7 @@ Our clock currently does not tell the time. It's just an object hierarchy, which
 <img src="images/Game-Objects-and-Scripts-029.png" width="28%">
 <img src="images/Game-Objects-and-Scripts-030.png" width="46%">
 
-Clock script asset.
+_Clock script asset._
 
 When the script is selected, the inspector will show its contents, and a button to open the file in a code editor. You can also double-click the asset to open the editor. The script file will contain the default code template for a component, shown below.
 
@@ -241,7 +241,7 @@ Our code is now valid. Save the file and switch back to Unity. The Unity editor 
 
 <img src="images/Game-Objects-and-Scripts-031.png" width="48%">
 
-Non-component script.
+_Non-component script._
 
 What this means is that we cannot use this script to create a component in Unity. At this point, our Clock defines a generic C# object type. Unity can only use subtypes of MonoBehaviour to create components.
 
@@ -275,7 +275,7 @@ public class Clock : MonoBehaviour {}
 
 <img src="images/Game-Objects-and-Scripts-032.png" width="48%">
 
-Clock with our component.
+_Clock with our component._
 
 A C# object instance has now been created, using our Clock class as a template. It has been added to the component list of the Clock game object.
 
@@ -324,7 +324,7 @@ Hours transform connected.
 
 After dragging or selecting the hours arm object, the Unity editor grabs its transform component and puts a reference to it in our field.
 
-### 2.3: Knowing all Three Arms
+### 2.3: Animating All Three Arms
 
 We have to do the same for the minutes and seconds arms. So add two more appropriately-named fields to Clock.
 
@@ -349,7 +349,7 @@ Hook up the other two arms in the editor as well.
 
 <img src="images/Game-Objects-and-Scripts-035.png" width="48%">
 
-All three arms connected.
+_All three arms connected._
 
 ### 2.4: Knowing the Time
 
@@ -494,10 +494,10 @@ void Awake () {
 
 <img src="images/Game-Objects-and-Scripts-036.png" width="48%">
 
-Hours arm at 4 o'clock.
+_Hour hand at 4 o'clock._
 
 >**What's local about the rotation?**
-`localRotation` refers to the actual rotation of a transform component, independent of the rotation of its parents. In other words, it is the rotation in the object's local space. It's what gets displayed in its transform component in the inspector. So if we were to rotate the clock's root object, its arms would rotate along with it, as we would expect. These is also a rotation property. It refers to the final rotation of a transform component in world space, taking the transformations of its parents into account. Had we used that, the arms would not adjust when we rotate the clock, as its rotation will be compensated for.
+`localRotation` refers to the actual rotation of a `transform` component, independent of the rotation of its parents. In other words, it is the rotation in the object's local space. It's what gets displayed in its transform component in the inspector. So if we were to rotate the clock's root object, its arms would rotate along with it, as we would expect. These is also a rotation property. It refers to the final rotation of a transform component in world space, taking the transformations of its parents into account. Had we used that, the arms would not adjust when we rotate the clock, as its rotation will be compensated for.
 
 The hours arm now jumps to the correct orientation when entering play mode. Let's give the same treatment to the other two arms. Both a minute and a second take up six degrees.
 
@@ -520,7 +520,7 @@ void Awake () {
 
 <img src="images/Game-Objects-and-Scripts-037.png" width="48%">
 
-Clock displaying 16:29:06.
+_Clock displaying 16:29:06._
 
 We're using DateTime.Now three times, to retrieve the hour, minute, and second. Each time we go through the property again, which requires some work, which could theoretically result in different time values. To make sure that this doesn't happen, we should retrieve the time only once. We can do this by declaring a variable inside the method and assign the time to it, then use this value afterwards.
 
@@ -557,13 +557,13 @@ void Update () {
 
 <img src="images/Game-Objects-and-Scripts-038.jpg" width="48%">
 
-Clock that stays up to date.
+_Clock that stays up to date._
 
 Note that our component has also gained a toggle in front of its name in the inspector. This allows us to disable the component, which prevents Unity from invoking its Update method.
 
 <img src="images/Game-Objects-and-Scripts-039.png" width="48%">
 
-Now with enabled toggle.
+_Now with enabled toggle._
 
 ### 2.7: Continuously Rotating
 
@@ -578,9 +578,9 @@ Booleans values are either true or false, which correspond to on and off in our 
 
 <img src="images/Game-Objects-and-Scripts-040.png" width="48%">
 
-Using the continuous option.
+_Using the continuous option._
 
-We now have two approaches to support. To prepare for this, duplicate our Update method and rename them to UpdateContinuous and UpdateDiscrete.
+We now have two approaches to support. To prepare for this, duplicate our `Update` method and rename them to `UpdateContinuous` and `UpdateDiscrete`.
 
 ```csharp
 void UpdateContinuous () {}
@@ -606,10 +606,10 @@ void UpdateDiscrete () {
 }
 ```
 
-Create a new `Update` method. If continuous is true, then it should invoke `UpdateContinuous`. This can be done with an if statement. The if keyword is followed by an expression within round brackets. If that expression evaluates as true, then the code block following it is executed. Otherwise, the code block is skipped.
+Create a new `Update` method. If `continuous` is `true`, then it should invoke `UpdateContinuous`. This can be done with an `if` statement. The `if` keyword is followed by an expression within round brackets. If that expression evaluates as true, then the code block following it is executed. Otherwise, the code block is skipped.
 
 ```csharp
-void Update () {
+void Update() {
   if (continuous) {
     UpdateContinuous();
   }
@@ -618,10 +618,10 @@ void Update () {
 
 Where does the new Update method have to be defined? Inside the Clock class. Its position relative to the other two methods doesn't matter. It can be either above or below them.
 
-It is also possible to add an alternative code block, to be executed when the expression ends up false. This is done with the else keyword. We can use that to invoke our UpdateDiscrete method.
+It is also possible to add an alternative code block, to be executed when the expression evaluates as false. This is done with the `else` keyword. We can use that to invoke our UpdateDiscrete method.
 
 ```csharp
-void Update () {
+void Update() {
   if (continuous) {
     UpdateContinuous();
   } else {
@@ -633,7 +633,7 @@ void Update () {
 We can now switch between approaches, but both still do the same thing. We have to adjust UpdateContinuous so it displays fractional hours, minutes, and seconds. Unfortunately, DateTime doesn't contain convenient fractional data. Fortunately, it does have a TimeOfDay property. This gives us a TimeSpan value that contains the data in the format that we need. Specifically TotalHours, TotalMinutes, and TotalSeconds.
 
 ```csharp
-void UpdateContinuous () {
+void UpdateContinuous() {
   TimeSpan time = DateTime.Now.TimeOfDay;
 
   hoursTransform.localRotation =
@@ -645,17 +645,20 @@ void UpdateContinuous () {
 }
 ```
 
-This will result in compile errors, because the new values have the wrong type. They are defined as double-precision floating point values, known as `double`. These values provide higher precision than float values, but Unity's code only works with single-precision floating point values. Is single precision enough? For most games, yes. It becomes a problem when working with very large distances or scale differences. Then you'll have to apply tricks like teleportation to keep the local play area near the world origin. While using double-precision would solve this problem, it would also double the size of the numbers involved, which leads to other performance problems. Hence, most game engines use floats.
+This will result in compile errors, because the new values have the wrong type. They are double-precision floating point values, and are declared with the `double` keyword. `double` values provide higher precision than `float` values, but Unity's code only works with single-precision floating point values.
 
-We can solve this problem by converting from double to float. This simply discards the precision data that we do not need. This process is known as casting and is done by writing the new type within round brackets in front of the value to be converted.
+>**Is single precision enough?**
+ For most games, yes. It becomes a problem when working with very large distances or scale differences. Then you'll have to apply tricks like teleportation to keep the local play area near the world origin. While using double-precision would solve this problem, it would also double the size of the numbers involved, which leads to other performance problems. Hence, most game engines use `float` values.
+
+We can solve this problem by converting from `double` to `float`. This simply discards the precision data that we do not need. This process is known as _casting_ and is done by writing the new type within round brackets in front of the value to be converted, like this `(float) time.TotalHours`.
 
 ```csharp
 hoursTransform.localRotation =
-  Quaternion.Euler(0f, (float)time.TotalHours * degreesPerHour, 0f);
+  Quaternion.Euler(0f, (float) time.TotalHours * degreesPerHour, 0f);
 minutesTransform.localRotation =
-  Quaternion.Euler(0f, (float)time.TotalMinutes * degreesPerMinute, 0f);
+  Quaternion.Euler(0f, (float) time.TotalMinutes * degreesPerMinute, 0f);
 secondsTransform.localRotation =
-  Quaternion.Euler(0f, (float)time.TotalSeconds * degreesPerSecond, 0f);
+  Quaternion.Euler(0f, (float) time.TotalSeconds * degreesPerSecond, 0f);
 ```
 
 <img src="images/Game-Objects-and-Scripts-041.jpg" width="48%">
