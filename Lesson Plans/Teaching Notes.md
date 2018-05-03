@@ -29,3 +29,7 @@ Vocabulary
 * using
 * variable
 * void
+
+Writing loops:
+
+1. Identify the code that you want to Repeat
