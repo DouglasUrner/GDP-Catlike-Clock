@@ -245,7 +245,7 @@ _Non-component script._
 
 What this means is that we cannot use this script to create a component in Unity. At this point, our Clock defines a generic C# object type. Unity can only use subtypes of MonoBehaviour to create components.
 
->**What does MonoBehavion mean?**
+>**What does MonoBehaviour mean?**
 The idea is that we can program our own components to add custom behavior to game objects. That's what the behavior part refers to. It just happens to use the British spelling, which is an oddity. The mono part refers to the way in which support for custom code was added to Unity. It used the Mono project, which is a multi-platform implementation of the .NET framework. Hence, MonoBehaviour. It's an old name that we're stuck with due to backwards-compatibility.
 
 To turn Clock into a subtype of MonoBehaviour, we have to change our type declaration so that it extends that type, which is done with a colon. This makes Clock inherit all the functionality of MonoBehaviour.
