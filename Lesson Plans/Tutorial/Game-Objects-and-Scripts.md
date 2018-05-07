@@ -9,6 +9,27 @@ _by Jasper Flick_
     Rotate the clock's arms to show the time.
     Animate the arms.
 
+<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Introduction](#introduction)
+- [Part 1: Building a Simple Clock](#part-1-building-a-simple-clock)
+	- [1.1: Creating a Game Object](#11-creating-a-game-object)
+	- [1.2: Creating the Face of the Clock](#12-creating-the-face-of-the-clock)
+	- [1.3: Creating the Clock Periphery](#13-creating-the-clock-periphery)
+	- [1.4: Creating the Arms](#14-creating-the-arms)
+- [Part 2: Animating the Clock](#part-2-animating-the-clock)
+	- [2.1: Defining a Component Type](#21-defining-a-component-type)
+	- [2.2: Getting Hold of an Arm](#22-getting-hold-of-an-arm)
+	- [2.3: Animating All Three Arms](#23-animating-all-three-arms)
+	- [2.4: Knowing the Time](#24-knowing-the-time)
+	- [2.5: Rotating the Arms](#25-rotating-the-arms)
+	- [2.6: Animating the Arms](#26-animating-the-arms)
+	- [2.7: Continuously Rotating](#27-continuously-rotating)
+
+<!-- /TOC -->
+
+## Introduction
+
 In this tutorial we will create a simple clock and program a component to have it display the current time. You only need a minimal understanding of the Unity editor. If you've played with it for a few minutes and know how to navigate the Scene window then you're good to go.
 
 This tutorial assumes you're using at least Unity 2017.1.0.
@@ -17,7 +38,7 @@ This tutorial assumes you're using at least Unity 2017.1.0.
 
 _It is time to create a clock._
 
-## 1: Building a Simple Clock
+## Part 1: Building a Simple Clock
 
 Open Unity and create a new 3D project. You don't need any extra asset packages and you also don't need analytics. If you haven't customized the editor yet, you will end up with its default window layout.
 
@@ -178,7 +199,7 @@ Our clock has now been constructed. If you haven't done so already, this is a go
 
 _Saved scene._
 
-## 2: Animating the Clock
+## Part 2: Animating the Clock
 
 Our clock currently does not tell the time. It's just an object hierarchy, which causes Unity to render a bunch of meshes. Nothing more. Had there been a default clock component, we could've used that to do some time-telling. As there isn't one, we'll have to create our own. Components are defined via scripts. Add a new script asset to the project via Assets / Create / C# Script and name it Clock.
 
