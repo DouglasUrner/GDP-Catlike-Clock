@@ -32,4 +32,8 @@ Vocabulary
 
 Writing loops:
 
-1. Identify the code that you want to Repeat
+1. Identify the lines of code that you want to repeat
+2. Identify what changes on each iteration
+3. Wrap the part that you want to repeat in a loop
+4. Use variables for the parts that will change
+5. Calculate the values (in terms of loop control variable)
