@@ -201,14 +201,16 @@ Our clock has now been constructed. If you haven't done so already, this is a go
 
 ## Part 2: Animating the Clock
 
-Our clock currently does not tell the time. It's just an object hierarchy, which causes Unity to render a bunch of meshes. Nothing more. Had there been a default clock component, we could've used that to do some time-telling. As there isn't one, we'll have to create our own. Components are defined via scripts. Add a new script asset to the project via Assets / Create / C# Script and name it Clock.
+Our clock currently does not tell the time. It's just an object hierarchy, which causes Unity to render a bunch of meshes. Nothing more. Had there been a default clock component, we could've used that to do some time-telling. As there isn't one, we'll have to create our own. New components are defined via scripts.
+
+Start by adding a new script asset to the project via Assets / Create / C# Script and name it Clock.
 
 <img src="images/Game-Objects-and-Scripts-029.png" width="28%">
 <img src="images/Game-Objects-and-Scripts-030.png" width="46%">
 
 _Clock script asset._
 
-When the script is selected, the inspector will show its contents, and a button to open the file in a code editor. You can also double-click the asset to open the editor. The script file will contain the default code template for a component, shown below.
+When the script is selected in the Hierarchy, the Inspector will show its contents, and a button to open the file in a code editor. You can also double-click the asset to open the editor. The script file will contain the default code template for a component, shown below.
 
 ```csharp
 using System.Collections;
@@ -226,24 +228,27 @@ public class Clock : MonoBehaviour {
 }
 ```
 
-This is C# code. It's the programming language used for scripting in Unity. To understand how the code works, we'll delete it all and start from scratch.
+This is C# code. It's the programming language used for writing scripts in Unity. To understand how the code works, we'll delete the contents of the template and start from scratch.
 
+<!--
 >**What about JavaScript?**
 Unity also supported another programming language, usually referred to as JavaScript, but its actual name is UnityScript. Unity 2017.1.0 still supports it, but the menu item to create a JavaScript asset will be removed in Unity 2017.2.0. Expect support to be dropped entirely after that.
+-->
 
 ### 2.1: Defining a Component Type
 
-An empty file is not a valid script. It must contain the definition of our clock component. We don't define a single instance of a component. Instead, we define the general class or type known as Clock. Once that's established, we could create multiple such components in Unity. In C#, we define the Clock type by first stating that we're defining a class, following by its name. In the code fragments below, changed code has a yellow background. As we start with an empty file, the contents of it should literally become class Clock and nothing else,
-though you could add spaces and newlines between words as you like.
+An empty file is not a valid script. It must contain the definition of our Clock component. We don't define a single instance of a component. Instead, we define a reusable _class_ or _type_ named as _Clock_. Once the Clock class is defined, we can use it to create multiple Clock components in Unity.
+
+In C#, we define the Clock type by first _declaring_ that we're defining a class (with the _keyword_ `class`), followed by the name of the class – `Clock`. In the code fragments below, changed code has a yellow background. As we start with an empty file, the contents of it should literally become `class Clock` and nothing else, though you could add spaces and newlines between words as you like.
 
 ```csharp
 class Clock
 ```
 
 >**What's a class, technically?**
-You can think of a class as a blueprint that can be used to create objects that reside in a computer's memory. The blueprint defines what data these objects can contain and what functionality they have. Classes can also define data and functionality that doesn't belong to objects, but to the class itself. This if often used to provide globally-available functionality.
+You can think of a class as a blueprint that can be used to create the objects in your game. The blueprint defines the data (information) that describes the object and the code that implements the behavior (functionality) of the object. Classes can also define data and functionality that doesn't belong to objects, but to the class itself. This if often used to provide globally-available functionality - for example the Math class defines the value of π (Math.PI) and funtions such as Math.Abs() which returns the absolute value of its argument.
 
-Because we don't want to restrict which code has access to our Clock, it is good form to prefix it with the public access modifier.
+Because we don't want to restrict which code has access to our Clock, we will prefix our declaration with the `public` access modifier.
 
 ```csharp
 public class Clock
