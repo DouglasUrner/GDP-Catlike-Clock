@@ -128,7 +128,11 @@ The indicator is hard to see, because it has the same color as the face. Let's c
 >**What is albedo?**
 Albedo is a Latin word which means whiteness. It's simply the color of a material.
 
-Make the hour indicator use this material. You can do this by dragging the material onto the object in either the scene or hierarchy window. You can also drag it to the bottom of the inspector window, or change Element 0 of the mesh renderer's Materials array.
+Make the hour indicator use this material. You can do this in a number of ways:
+
+- By dragging the material onto the object in either the scene or hierarchy window.
+- Or by dragging it to the bottom of the inspector window.
+- Or by draggin it onto Element 0 of the mesh renderer's Materials array.
 
 <img src="images/Game-Objects-and-Scripts-016.png" width="48%">
 
