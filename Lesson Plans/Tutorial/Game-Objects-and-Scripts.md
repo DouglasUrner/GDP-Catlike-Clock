@@ -201,16 +201,16 @@ Our clock has now been constructed. If you haven't done so already, this is a go
 
 ## Part 2: Animating the Clock
 
-Our clock currently does not tell the time. It's just an object hierarchy, which causes Unity to render a bunch of meshes. Nothing more. Had there been a default clock component, we could've used that to do some time-telling. As there isn't one, we'll have to create our own. New components are defined via scripts.
+Currently, our clock does not tell the time. It's just an object hierarchy, which causes Unity to render a bunch of meshes. Nothing more. If Unity had a clock component, we could have used that to do some time-telling. But since there isn't one, we'll have to create our own. In Unity, we can create a new component by writing a C# (C Sharp, like the musical note) _script_ that defines the component.
 
 Start by adding a new script asset to the project via Assets / Create / C# Script and name it Clock.
 
 <img src="images/Game-Objects-and-Scripts-029.png" width="28%">
-<img src="images/Game-Objects-and-Scripts-030.png" width="46%">
+<img src="images/Game-Objects-and-Scripts-030.png" width="44%">
 
 _Clock script asset._
 
-When the script is selected in the Hierarchy, the Inspector will show its contents, and a button to open the file in a code editor. You can also double-click the asset to open the editor. The script file will contain the default code template for a component, shown below.
+When the script is selected in the Hierarchy, the Inspector will show its contents, and a button to open the file in a code editor. You can also double-click on the script to open it in the editor. The script file will contain the default code template for a component, shown below.
 
 ```csharp
 using System.Collections;
@@ -228,7 +228,7 @@ public class Clock : MonoBehaviour {
 }
 ```
 
-This is C# code. It's the programming language used for writing scripts in Unity. To understand how the code works, we'll delete the contents of the template and start from scratch.
+This is C# code. It's the programming language used for creating components in Unity. To understand how the code works, we'll delete the contents of the template and start from scratch with an empty file.
 
 <!--
 >**What about JavaScript?**
@@ -248,22 +248,22 @@ class Clock
 >**What's a class, technically?**
 You can think of a class as a blueprint that can be used to create the objects in your game. The blueprint defines the data (information) that describes the object and the code that implements the behavior (functionality) of the object. Classes can also define data and functionality that doesn't belong to objects, but to the class itself. This if often used to provide globally-available functionality - for example the Math class defines the value of π (Math.PI) and funtions such as Math.Abs() which returns the absolute value of its argument.
 
-Because we don't want to restrict which code has access to our Clock, we will prefix our declaration with the `public` access modifier.
+Because we don't want to restrict which objects in our game have access to the Clock, we will prefix our declaration with the `public` access modifier keyword.
 
 ```csharp
 public class Clock
 ```
 
 >**What is the default access modifier for classes?**
-Without the access modifier, it would be as if we had written internal class Clock. That would restrict access to code from the same assembly, which becomes relevant when you use code packaged in multiple DLL files. To make sure it always works, make classes public by default.
+Without the access modifier, it would be as if we had written internal class Clock. That would restrict access to code from the same assembly, which becomes relevant when you use code packaged in multiple DLL files. To make sure it always works, your should make classes public by default.
 
-At this point we don't have valid C# syntax yet. We indicated that we're defining a type, so we must actually define what it is like. That's done by a block of code that follows the declaration. The boundaries of a code block are indicated with curly brackets. We're leaving it empty for now, so just use `{}`.
+At this point we don't have valid C# syntax yet. We indicated that we're defining a type, so we must actually define what it is like. That's done by a _block_ of code that follows the declaration. The boundaries of a code block are indicated with curly brackets. We're leaving it empty for now, so just add `{}` to complete our, empty for now, class. We have a class called Clock, but it doesn't do anything yet.
 
 ```csharp
 public class Clock {}
 ```
 
-Our code is now valid. Save the file and switch back to Unity. The Unity editor will detect that the script asset has changed and triggers a recompilation. After that is done, select our script. The inspector will inform us that the asset does not contain a MonoBehaviour script.
+Our code is now valid. Save the file and switch back to Unity. The Unity editor detects that the script has changed and triggers a recompilation. After that is done, select our script. The Inspector will inform us that our Clock does not contain a MonoBehaviour script.
 
 <img src="images/Game-Objects-and-Scripts-031.png" width="48%">
 
