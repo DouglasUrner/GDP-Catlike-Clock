@@ -19,3 +19,6 @@
 # machines without Rider installed.
 #
 Assets/Plugins/Editor/JetBrains*
+# Avoid suprious diffs.
+ProjectSettings/ProjectVersion.txt
+
